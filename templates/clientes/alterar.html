@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Cliente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <header class="bg-blue-700 text-white p-4">
+        <h1 class="text-2xl text-center font-bold">Editar Cliente</h1>
+    </header>
+
+    <main class="p-6 max-w-xl mx-auto">
+        <h2 class="text-xl font-semibold mb-4">Editar Cliente</h2>
+
+        <form action="{{ url_for('alterar_cliente', id=cliente.idcliente) }}" method="post" class="bg-white shadow p-6 rounded space-y-4">
+            <input type="text" name="nome" value="{{ cliente.nome }}" required class="w-full border rounded p-2">
+            <input type="text" name="endereco" value="{{ cliente.endereco }}" required class="w-full border rounded p-2">
+            <input type="text" name="cidade" value="{{ cliente.cidade }}" required class="w-full border rounded p-2">
+            <input type="text" name="uf" value="{{ cliente.uf }}" maxlength="2" required class="w-full border rounded p-2">
+            <input type="text" name="cep" value="{{ cliente.cep }}" maxlength="9" required class="w-full border rounded p-2">
+
+            <div class="flex justify-between">
+                <a href="{{ url_for('listar_clientes') }}" class="text-blue-600 hover:underline">Cancelar</a>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Atualizar</button>
+            </div>
+        </form>
+    </main>
+
+</body>
+</html>

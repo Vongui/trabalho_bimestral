@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Prestadores</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <header class="bg-yellow-600 text-white p-4">
+        <h1 class="text-2xl text-center font-bold">Lista de Prestadores</h1>
+    </header>
+
+    <main class="p-6 max-w-5xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-semibold">Prestadores Cadastrados</h2>
+            <div class="space-x-2">
+                <a href="{{ url_for('cadastrar_prestador') }}" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">
+                    Cadastrar Prestador
+                </a>
+            </div>
+        </div>
+
+        <table class="min-w-full bg-white shadow rounded">
+            <thead class="bg-yellow-100 text-left">
+                <tr>
+                    <th class="py-3 px-4 text-left">Nome da Empresa</th>
+                    <th class="py-3 px-4">Cidade</th>
+                    <th class="py-3 px-4">UF</th>
+                    <th class="py-3 px-4 text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prestador in lista %}
+                <tr class="border-t hover:bg-gray-50">
+                    <td class="py-2 px-4">{{ prestador.nome_empresa }}</td>
+                    <td class="py-2 px-4">{{ prestador.cidade }}</td>
+                    <td class="py-2 px-4">{{ prestador.uf }}</td>
+                    <td class="py-2 px-4 text-center space-x-2">
+                        <a href="{{ url_for('alterar_prestador', id=prestador.idprestador) }}" class="text-yellow-600 hover:underline">Editar</a>
+                        <a href="{{ url_for('remover_prestador', id=prestador.idprestador) }}" class="text-red-600 hover:underline" onclick="return confirm('Remover prestador?')">Remover</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="py-4 text-center text-gray-500">Nenhum prestador encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="mt-6 text-center">
+            <a href="{{ url_for('index') }}" class="text-yellow-600 hover:underline">Voltar para Painel Principal</a>
+        </div>
+    </main>
+
+</body>
+</html>
