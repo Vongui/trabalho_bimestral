@@ -2,14 +2,14 @@ from dao.connection import *
 import json
 import datetime
 
-class ControleGenerico:
+class ControllerGenerico:
 
     def __init__(self):
         self.ob = Banco()
         self.ob.configura(ho="localhost",
                           db="venda_trb",
                           us="root",
-                          se="ifsp",
+                          se="#Gm09191981",
                           po=3306)
 
     def incluir(self,objeto):
