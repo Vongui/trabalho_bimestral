@@ -12,7 +12,7 @@
     </header>
 
     <main class="p-6 max-w-2xl mx-auto">
-        <form action="{{ url_for('alterar_veiculo', placa=veiculo.idplaca) }}" method="POST" class="bg-white p-6 rounded shadow-md space-y-4">
+        <form action="{{ url_for('alterar_veiculo', idplaca=veiculo.idplaca) }}" method="POST" class="bg-white p-6 rounded shadow-md space-y-4">
 
             <div>
                 <label for="idplaca" class="block text-sm font-medium text-gray-700">Placa</label>
@@ -21,7 +21,7 @@
 
             <div>
                 <label for="ano" class="block text-sm font-medium text-gray-700">Ano</label>
-                <input type="number" name="ano" min="1900" max="2100" value="{{ veiculo.ano }}" required class="mt-1 block w-full rounded border-gray-300 shadow-sm" />
+                <input type="number" name="ano" min="0" value="{{ veiculo.ano }}" required class="mt-1 block w-full rounded border-gray-300 shadow-sm" />
             </div>
 
             <div>

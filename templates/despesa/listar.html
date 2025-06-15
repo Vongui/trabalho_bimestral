@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Listar Despesas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+
+  <header class="bg-yellow-600 text-white p-4 mb-6">
+    <h1 class="text-2xl font-semibold">Lista de Despesas</h1>
+  </header>
+
+  <main class="max-w-5xl mx-auto bg-white p-6 rounded shadow">
+    <div class="flex justify-between items-center mb-6">
+      <a href="{{ url_for('cadastrar_despesa') }}"
+         class="inline-block bg-yellow-600 text-white px-6 py-2 rounded hover:bg-yellow-700 transition">
+         Nova Despesa
+      </a>
+    </div>
+    <table class="min-w-full border border-gray-200">
+      <thead class="bg-yellow-100">
+        <tr>
+          <th class="border border-gray-300 px-4 py-2 text-left">ID Despesa</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Placa</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">ID Prestador</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Descrição</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Data Serviço</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Valor (R$)</th>
+          <th class="border border-gray-300 px-4 py-2 text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for despesa in lista %}
+        <tr class="hover:bg-yellow-50">
+          <td class="border border-gray-300 px-4 py-2">{{ despesa.iddespesa }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ despesa.idplaca }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ despesa.idprestador }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ despesa.descricao }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ despesa.data_servico }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ "%.2f"|format(despesa.valor) }}</td>
+          <td class="border border-gray-300 px-4 py-2 text-center space-x-2">
+            <a href="{{ url_for('alterar_despesa', iddespesa=despesa.iddespesa) }}"
+               class="text-blue-600 hover:underline">Editar</a>
+            <a href="{{ url_for('remover_despesa', iddespesa=despesa.iddespesa) }}"
+               class="text-red-600 hover:underline"
+               onclick="return confirm('Confirma exclusão da despesa?');">Excluir</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="7" class="text-center p-4 text-gray-500">Nenhuma despesa cadastrada.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="mt-6 flex flex-col sm:flex-row justify-between gap-2">
+      <a href="{{ url_for('index') }}"
+         class="inline-block text-yellow-700 hover:underline px-4 py-2">
+         Voltar ao Início
+      </a>
+    </div>
+
+  </main>
+
+</body>
+</html>

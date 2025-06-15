@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Despesa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+
+  <header class="bg-yellow-600 text-white p-4 mb-6">
+    <h1 class="text-2xl font-semibold">Editar Despesa</h1>
+  </header>
+
+  <main class="max-w-lg mx-auto bg-white p-6 rounded shadow">
+    <form action="{{ url_for('alterar_despesa', iddespesa=despesa.iddespesa) }}" method="POST" class="space-y-4">
+
+      <div>
+        <label for="iddespesa" class="block font-medium mb-1">ID Despesa</label>
+        <input type="number" id="iddespesa" name="iddespesa" value="{{ despesa.iddespesa }}" readonly
+          class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100 cursor-not-allowed" />
+      </div>
+
+      <div>
+        <label for="idplaca" class="block font-medium mb-1">Placa do Veículo</label>
+        <input type="text" id="idplaca" name="idplaca" value="{{ despesa.idplaca }}" maxlength="9" readonly
+          class="w-full border border-gray-300 rounded px-3 py-2 bg-gray-100 cursor-not-allowed" />
+      </div>
+
+      <div>
+        <label for="idprestador" class="block font-medium mb-1">ID Prestador</label>
+        <input type="number" id="idprestador" name="idprestador" value="{{ despesa.idprestador }}" required
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+      </div>
+
+      <div>
+        <label for="descricao" class="block font-medium mb-1">Descrição</label>
+        <input type="text" id="descricao" name="descricao" value="{{ despesa.descricao }}" maxlength="80" required
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+      </div>
+
+      <div>
+        <label for="data_servico" class="block font-medium mb-1">Data do Serviço</label>
+        <input type="date" id="data_servico" name="data_servico" value="{{ despesa.data_servico }}" required
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+      </div>
+
+      <div>
+        <label for="valor" class="block font-medium mb-1">Valor (R$)</label>
+        <input type="number" step="0.01" id="valor" name="valor" value="{{ despesa.valor }}" required
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+      </div>
+
+      <div class="flex justify-between">
+        <button type="submit" class="bg-yellow-600 text-white px-6 py-2 rounded hover:bg-yellow-700 transition">
+          Salvar Alterações
+        </button>
+        <a href="{{ url_for('listar_despesas') }}" class="text-yellow-600 hover:underline px-4 py-2">
+          Cancelar
+        </a>
+      </div>
+
+    </form>
+  </main>
+
+</body>
+</html>

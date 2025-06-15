@@ -1,3 +1,5 @@
+import traceback
+
 from dao.connection import *
 import json
 import datetime
@@ -17,12 +19,15 @@ class ControllerGenerico:
         sql = "insert into {} ".format(objeto.tabelaBanco)+'('
         sql+= '{}'.format(objeto.lista)
         sql+= ') values ({})'.format(objeto.dadosInserir)
+        print(sql)
 
         try:
            self.ob.execute(sql)
            self.ob.gravar()
         except Exception as e:
+           print(sql)
            print("Houve um erro", e)
+           traceback.print_exc()
            self.ob.descarte()
 
     def alterar(self,objeto):
@@ -30,12 +35,14 @@ class ControllerGenerico:
         sql = "update {} ".format(objeto.tabelaBanco)
         sql += 'set {}'.format(objeto.dadosUpdate)
 
+        print(sql)
         try:
            self.ob.execute(sql)
            self.ob.gravar()
         except:
            print("Houve um erro")
            self.ob.descarte()
+
 
     def delete(self, objeto):
         self.ob.abrirConexao()

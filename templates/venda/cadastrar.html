@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cadastrar Venda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <header class="bg-gray-300 text-gray-700 p-4">
+        <h1 class="text-2xl text-center font-bold">Cadastrar Venda</h1>
+    </header>
+
+    <main class="p-6 max-w-xl mx-auto">
+        <form action="{{ url_for('cadastrar_venda') }}" method="post" class="bg-white p-6 rounded shadow space-y-4">
+            <div>
+                <label class="block text-gray-700">Placa do Veículo</label>
+                <select name="idplaca" required class="w-full border border-gray-300 rounded p-2">
+                    <option value="" disabled selected>Selecione o veículo</option>
+                    {% for veiculo in veiculos %}
+                        <option value="{{ veiculo.idplaca }}">{{ veiculo.idplaca }} - {{ veiculo.modelo_veiculo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-gray-700">Cliente</label>
+                <select name="idcliente" required class="w-full border border-gray-300 rounded p-2">
+                    <option value="" disabled selected>Selecione o cliente</option>
+                    {% for cliente in clientes %}
+                        <option value="{{ cliente.idcliente }}">{{ cliente.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-gray-700">Data da Venda</label>
+                <input type="date" name="data_venda" required class="w-full border border-gray-300 rounded p-2">
+            </div>
+
+            <div>
+                <label class="block text-gray-700">Valor da Venda</label>
+                <input type="number" name="valor_vendido" step="0.01" required class="w-full border border-gray-300 rounded p-2">
+            </div>
+
+            <div>
+                <label class="block text-gray-700">Forma de Pagamento</label>
+                <input type="text" name="forma_pagamento" required class="w-full border border-gray-300 rounded p-2">
+            </div>
+
+            <div class="flex justify-between">
+                <a href="{{ url_for('listar_vendas') }}" class="text-gray-600 hover:underline">Cancelar</a>
+                <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800">
+                    Salvar Venda
+                </button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

@@ -30,6 +30,7 @@
                     <th class="py-3 px-4">Preço FIPE</th>
                     <th class="py-3 px-4">Preço Venda</th>
                     <th class="py-3 px-4">Total Despesa</th>
+                    <th class="py-3 px-4">Status</th>
                     <th class="py-3 px-4 text-center">Ações</th>
                 </tr>
             </thead>
@@ -44,9 +45,20 @@
                     <td class="py-2 px-4">R$ {{ "%.2f"|format(veiculo.preco_fipe) }}</td>
                     <td class="py-2 px-4">R$ {{ "%.2f"|format(veiculo.preco_venda) }}</td>
                     <td class="py-2 px-4">R$ {{ "%.2f"|format(veiculo.total_despesa) }}</td>
+                    <td class="py-2 px-4">
+                        {% if veiculo.status == 0 %}
+                            Na Loja
+                        {% elif veiculo.status == 1 %}
+                            Vendido
+                        {% elif veiculo.status == 2 %}
+                            Comprado
+                        {% else %}
+                            Desconhecido
+                        {% endif %}
+                    </td>
                     <td class="py-2 px-4 text-center space-x-2">
-                        <a href="{{ url_for('alterar_veiculo', placa=veiculo.idplaca) }}" class="text-gray-700 hover:underline">Editar</a>
-                        <a href="{{ url_for('remover_veiculo', placa=veiculo.idplaca) }}" class="text-red-700 hover:underline" onclick="return confirm('Remover veículo?')">Remover</a>
+                        <a href="{{ url_for('alterar_veiculo', idplaca=veiculo.idplaca) }}" class="text-gray-700 hover:underline">Editar</a>
+                        <a href="{{ url_for('remover_veiculo', idplaca=veiculo.idplaca) }}" class="text-red-700 hover:underline" onclick="return confirm('Remover veículo?')">Remover</a>
                     </td>
                 </tr>
                 {% else %}
