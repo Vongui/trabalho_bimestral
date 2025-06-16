@@ -27,6 +27,7 @@
                     <th class="py-3 px-4 text-left">Nome da Empresa</th>
                     <th class="py-3 px-4">Cidade</th>
                     <th class="py-3 px-4">UF</th>
+                    <th class="py-3 px-4">CEP</th>
                     <th class="py-3 px-4 text-center">Ações</th>
                 </tr>
             </thead>
@@ -36,6 +37,7 @@
                     <td class="py-2 px-4">{{ prestador.nome_empresa }}</td>
                     <td class="py-2 px-4">{{ prestador.cidade }}</td>
                     <td class="py-2 px-4">{{ prestador.uf }}</td>
+                    <td class="py-2 px-4">{{ prestador.cep }}</td>
                     <td class="py-2 px-4 text-center space-x-2">
                         <a href="{{ url_for('alterar_prestador', id=prestador.idprestador) }}" class="text-yellow-600 hover:underline">Editar</a>
                         <a href="{{ url_for('remover_prestador', id=prestador.idprestador) }}" class="text-red-600 hover:underline" onclick="return confirm('Remover prestador?')">Remover</a>

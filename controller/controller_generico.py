@@ -11,7 +11,7 @@ class ControllerGenerico:
         self.ob.configura(ho="localhost",
                           db="venda_trb",
                           us="root",
-                          se="#Gm09191981",
+                          se="ifsp",
                           po=3306)
 
     def incluir(self,objeto):

@@ -81,7 +81,7 @@ def alterar_cliente(id):
         return redirect(url_for("listar_clientes"))
 
     cliente_dados = controller_cliente.pesquisaCodigo(cliente)
-    return render_template("clientes/alterar.html", titulo="Alterar Cliente", cliente=cliente_dados)
+    return render_template("clientes/editar.html", titulo="Alterar Cliente", cliente=cliente_dados)
 
 
 #==================================Prestador=====================================
@@ -131,7 +131,7 @@ def alterar_prestador(id):
         return redirect(url_for("listar_prestadores"))
 
     prestador_dados = controller_prestador.pesquisaCodigo(prestador)
-    return render_template("prestador/alterar.html", titulo="Alterar Prestador", prestador=prestador_dados)
+    return render_template("prestador/editar.html", titulo="Alterar Prestador", prestador=prestador_dados)
 
 
 #=========================== Veículo ==============================
@@ -219,7 +219,9 @@ def cadastrar_despesa():
         flash("Despesa cadastrada com sucesso!", "success")
         return redirect(url_for("listar_despesas"))
 
-    return render_template("despesa/cadastrar.html", titulo="Cadastro de Despesa", veiculos=veiculos, prestadores=prestadores)
+    idplaca_selecionada = request.args.get("idplaca")
+
+    return render_template("despesa/cadastrar.html", titulo="Cadastro de Despesa", veiculos=veiculos, prestadores=prestadores,idplaca=idplaca_selecionada)
 
 @app.route("/remover-despesa/<int:iddespesa>")
 def remover_despesa(iddespesa):

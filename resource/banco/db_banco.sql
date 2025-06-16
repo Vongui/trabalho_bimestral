@@ -19,14 +19,15 @@ create table veiculo(
     modelo_veiculo 	varchar(60),
     cor 			varchar(20),
     preco_venda 	decimal(10,2),
-    total_despesa 	decimal(10,2)
+    total_despesa 	decimal(10,2),
+    status 			int
 );
 
 create table compra(
 	idcompra 		int primary key auto_increment,
     idplaca 		varchar(9),
     idcliente 		int,
-    data 			date,
+    data			date,
     valor_pago 		decimal(10,2),
     forma_pagamento varchar(40),
     foreign key(idplaca) references veiculo(idplaca),
@@ -58,8 +59,8 @@ create table despesa(
     descricao 		varchar(80),
     idprestador 	int,
     data_servico 	date,
+    valor 			decimal(8,2),
     primary key(iddespesa, idplaca),
     foreign key(idplaca) references veiculo(idplaca),
     foreign key(idprestador) references prestador(idprestador)
-    
 )

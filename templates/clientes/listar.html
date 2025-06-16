@@ -27,6 +27,7 @@
                     <th class="py-3 px-4 text-left">Nome</th>
                     <th class="py-3 px-4">Cidade</th>
                     <th class="py-3 px-4">UF</th>
+                    <th class="py-3 px-4">CEP</th>
                     <th class="py-3 px-4 text-center">Ações</th>
                 </tr>
             </thead>
@@ -36,6 +37,7 @@
                     <td class="py-2 px-4">{{ cliente.nome }}</td>
                     <td class="py-2 px-4">{{ cliente.cidade }}</td>
                     <td class="py-2 px-4">{{ cliente.uf }}</td>
+                    <td class="py-2 px-4">{{ cliente.cep }}</td>
                     <td class="py-2 px-4 text-center space-x-2">
                         <a href="{{ url_for('alterar_cliente', id=cliente.idcliente) }}" class="text-blue-600 hover:underline">Editar</a>
                         <a href="{{ url_for('remover_cliente', id=cliente.idcliente) }}" class="text-red-600 hover:underline" onclick="return confirm('Remover cliente?')">Remover</a>

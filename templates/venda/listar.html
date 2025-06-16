@@ -41,8 +41,8 @@
                     <td class="py-2 px-4">R$ {{ "%.2f"|format(venda.valor_vendido) }}</td>
                     <td class="py-2 px-4">{{ venda.forma_pagamento }}</td>
                     <td class="py-2 px-4 text-center space-x-2">
-                        <a href="{{ url_for('remover_venda', idvenda=venda.idvenda) }}" class="text-red-700 hover:underline" onclick="return confirm('Remover venda?')">Remover</a>
                         <a href="{{ url_for('alterar_venda', idvenda=venda.idvenda) }}" class="text-blue-700 hover:underline">Editar</a>
+                        <a href="{{ url_for('remover_venda', idvenda=venda.idvenda) }}" class="text-red-700 hover:underline" onclick="return confirm('Remover venda?')">Remover</a>
                     </td>
                 </tr>
                 {% else %}
