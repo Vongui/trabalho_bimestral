@@ -23,8 +23,8 @@
             <thead class="bg-gray-300 text-left">
                 <tr>
                     <th class="py-3 px-4">ID</th>
-                    <th class="py-3 px-4">Cliente</th>
                     <th class="py-3 px-4">Placa do Veículo</th>
+                    <th class="py-3 px-4">Cliente</th>
                     <th class="py-3 px-4">Data da Venda</th>
                     <th class="py-3 px-4">Valor da Venda</th>
                     <th class="py-3 px-4">Forma de Pagamento</th>
@@ -35,8 +35,8 @@
                 {% for venda in lista %}
                 <tr class="border-t hover:bg-gray-50">
                     <td class="py-2 px-4">{{ venda.idvenda }}</td>
-                    <td class="py-2 px-4">{{ venda.idcliente }}</td>
                     <td class="py-2 px-4">{{ venda.idplaca }}</td>
+                    <td class="py-2 px-4">{{ venda.nome }}</td>
                     <td class="py-2 px-4">{{ venda.data }}</td>
                     <td class="py-2 px-4">R$ {{ "%.2f"|format(venda.valor_vendido) }}</td>
                     <td class="py-2 px-4">{{ venda.forma_pagamento }}</td>

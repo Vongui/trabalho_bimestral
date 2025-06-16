@@ -23,7 +23,7 @@
         <tr>
           <th class="border border-gray-300 px-4 py-2 text-left">ID Despesa</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Placa</th>
-          <th class="border border-gray-300 px-4 py-2 text-left">ID Prestador</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Prestador</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Descrição</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Data Serviço</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Valor (R$)</th>
@@ -35,7 +35,7 @@
         <tr class="hover:bg-yellow-50">
           <td class="border border-gray-300 px-4 py-2">{{ despesa.iddespesa }}</td>
           <td class="border border-gray-300 px-4 py-2">{{ despesa.idplaca }}</td>
-          <td class="border border-gray-300 px-4 py-2">{{ despesa.idprestador }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ despesa.nome_prestador }}</td>
           <td class="border border-gray-300 px-4 py-2">{{ despesa.descricao }}</td>
           <td class="border border-gray-300 px-4 py-2">{{ despesa.data_servico }}</td>
           <td class="border border-gray-300 px-4 py-2">{{ "%.2f"|format(despesa.valor) }}</td>

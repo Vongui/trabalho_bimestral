@@ -13,6 +13,7 @@ from controller.controller_compra import ControllerCompra
 from model.compra import Compra
 from controller.controller_venda import ControllerVenda
 from model.venda import Venda
+from decimal import Decimal
 
 controller_cliente = ControllerCliente()
 controller_prestador = ControllerPrestador()
@@ -28,13 +29,10 @@ app.secret_key = '1234'
 def index():
     return render_template("index.html", titulo="Página Inicial")
 
-
-
 #==================================Cliente=====================================
 @app.route("/listar-clientes")
 def listar_clientes():
     clientes = controller_cliente.listarTodosRegistros(Cliente())
-    print(clientes)
     return render_template("clientes/listar.html", titulo="Lista de Clientes", lista=clientes)
 
 @app.route("/cadastrar-cliente", methods=["GET", "POST"])
@@ -195,7 +193,13 @@ def alterar_veiculo(idplaca):
 @app.route("/listar-despesas")
 def listar_despesas():
     despesas = controller_despesa.listarTodosRegistros(Despesa())
-    return render_template("despesa/listar.html", titulo="Lista de Despesas", lista=despesas)
+    prestadores = controller_prestador.listarTodosRegistros(Prestador())
+    prestadores_dict = {prestador.idprestador: prestador.nome_empresa for prestador in prestadores}
+
+    for despesa in despesas:
+        despesa.nome_prestador = prestadores_dict.get(despesa.idprestador, "Desconhecido")
+
+    return render_template("despesa/listar.html", titulo="Lista de Despesas", lista=despesas, prestadores=prestadores)
 
 @app.route("/cadastrar-despesa", methods=["GET", "POST"])
 def cadastrar_despesa():
@@ -214,6 +218,12 @@ def cadastrar_despesa():
         despesa.descricao = request.form["descricao"]
         despesa.data_servico = request.form["data_servico"]
         despesa.valor = float(request.form["valor"])
+
+        for v in veiculos:
+            if v.idplaca == despesa.idplaca:
+                v.total_despesa += Decimal(despesa.valor)
+                controller_veiculo.alterar(v)
+                break
 
         controller_despesa.incluir_despesa(despesa)
         flash("Despesa cadastrada com sucesso!", "success")
@@ -263,7 +273,11 @@ def alterar_despesa(iddespesa):
 @app.route("/listar-compras")
 def listar_compras():
     compras = controller_compra.listarTodosRegistros(Compra())
-    print(compras)
+    clientes = controller_cliente.listarTodosRegistros(Cliente())
+    clientes_dict = {cliente.idcliente: cliente.nome for cliente in clientes}
+
+    for compra in compras:
+        compra.nome = clientes_dict.get(compra.idcliente, "Desconhecido")
     return render_template("compra/listar.html", titulo="Lista de Compras", lista=compras)
 
 @app.route("/cadastrar-compra", methods=["GET", "POST"])
@@ -283,7 +297,7 @@ def cadastrar_compra():
         flash("Compra cadastrada com sucesso!", "success")
         for v in veiculos:
             if v.idplaca == compra.idplaca:
-                v.status = 2
+                v.status = 0
                 controller_veiculo.alterar(v)
                 break
 
@@ -323,9 +337,14 @@ def alterar_compra(idcompra):
 
 # ========================== VENDA ===============================
 @app.route("/listar-vendas")
+@app.route("/listar-vendas")
 def listar_vendas():
     vendas = controller_venda.listarTodosRegistros(Venda())
-    print(vendas)
+    clientes = controller_cliente.listarTodosRegistros(Cliente())
+    clientes_dict = {cliente.idcliente: cliente.nome for cliente in clientes}
+
+    for venda in vendas:
+        venda.nome = clientes_dict.get(venda.idcliente, "Desconhecido")
     return render_template("venda/listar.html", titulo="Lista de Vendas", lista=vendas)
 
 @app.route("/cadastrar-venda", methods=["GET", "POST"])
